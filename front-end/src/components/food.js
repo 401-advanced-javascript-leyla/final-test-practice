@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import superagent from 'superagent';
 
-const API_URL = 'http://localhost: 8080';
+const API_URL = 'http://localhost:8080';
 
 class Food extends React.Component{
 
@@ -12,7 +12,7 @@ class Food extends React.Component{
       .send({id: e.target.value, name: "updated name", amount: "100"})
       .set('Accept', 'application/json')
       .then(results=>{
-        this.props.loadStore(results);
+        this.props.loadStore(results.body);
       })
       .catch(console.log('something went wrong with updating store'));
   }
@@ -22,7 +22,7 @@ class Food extends React.Component{
     e.preventDefault();
     superagent.delete(`${API_URL}/foods/${e.target.value}`)
       .then(results => {
-        this.props.loadStore(results);
+        this.props.loadStore(results.body);
       })
       .catch(console.log('something went wrong with deleting stroe'));
   };
@@ -31,11 +31,11 @@ class Food extends React.Component{
   render(){
     return(
       <>
-        <li key={this.props.id}>
-          <p>name: {this.props.name}</p>
-          <p>amount: {this.props.amount}</p>
-          <button value={this.props.id} onClick={this.handleUpdate}>update</button>
-          <button value={this.props.id} onClick={this.handleDelete}>delete</button>
+        <li key={this.props.food.id}>
+          <p>name: {this.props.food.name}</p>
+          <p>amount: {this.props.food.amount}</p>
+          <button value={this.props.food.id} onClick={this.handleUpdate}>update</button>
+          <button value={this.props.food.id} onClick={this.handleDelete}>delete</button>
         </li>
       </>
     );
