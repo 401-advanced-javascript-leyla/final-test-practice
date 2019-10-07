@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import superagent from 'superagent';
-// import Food from './components/food';
+import Food from './components/food';
 
 const API_URL = 'http://localhost:8080';
 
@@ -20,17 +20,18 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {/* <ul>
-          {this.props.foods.map((food) => {
-            return <Food food={food} />
-          })}
-        </ul> */}
-        {console.log(this.props)}
+        <ul>
+          {
+            this.props.foods.map(food => 
+            <Food key={food.id} food={food} />)
+          }
+        </ul>
+        {/* {console.log(this.props)}
         <ul>
           {this.props.foods.map(food => 
             <li>{food.name}</li>
           )}
-        </ul>          
+        </ul>           */}
       </>
     );
   }
